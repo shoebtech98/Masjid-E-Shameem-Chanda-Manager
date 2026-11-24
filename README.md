@@ -12,6 +12,12 @@
   <a href="https://github.com/shoebtech98/Masjid-E-Shameem---Chanda-Manager/releases">Android releases</a>
 </p>
 
+## Sample screens
+
+![Chanda Manager previews showing the dashboard, split payment entry, and monthly report filters](docs/media/chanda-manager-screens.png)
+
+*Illustrative screen previews using fictional households and payments.*
+
 ## How it works
 
 1. **Sign in** with an account issued by the masjid administrator.
@@ -21,6 +27,26 @@
 5. **Review collections** in the monthly or annual report. Print, save, or share the PDF from the app.
 
 Administrators can also manage records and user accounts from the [website](https://masjideshameem.pages.dev/admin).
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Mobile["Expo app<br/>Android and iPhone"]
+    Browser["Administrator<br/>Web browser"]
+    Pages["Cloudflare Pages<br/>Website and admin API proxy"]
+    Worker["Cloudflare Worker<br/>Authentication, permissions and records API"]
+    D1[("Cloudflare D1<br/>Users, households and payments")]
+    PDF["Device PDF tools<br/>Print, save and share"]
+
+    Mobile -->|"HTTPS · bearer session"| Worker
+    Browser -->|"HTTPS · secure session cookie"| Pages
+    Pages -->|"HTTPS · bearer session"| Worker
+    Worker -->|"D1 binding"| D1
+    Mobile -->|"Confirmed report and payment data"| PDF
+```
+
+The app and admin website use the same Worker and D1 records. The Worker checks permissions before serving data or changing records. The mobile app generates PDFs from the records returned by the API.
 
 ## Install on Android
 
