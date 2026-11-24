@@ -1,0 +1,48 @@
+# Masjid E Shameem – Chanda Manager · Cloudflare Workers + D1
+#
+# Setup (one time, requires a Cloudflare account — free plan):
+#   wrangler login
+#   wrangler d1 create masjid-shameem        # prints a database_id -> paste below
+#   wrangler d1 execute masjid-shameem --file src/schema.sql
+#   wrangler secret put INITIAL_ADMIN_EMAIL
+#   wrangler secret put INITIAL_ADMIN_PASSWORD
+#   wrangler deploy
+#
+# Secrets must NEVER be committed here. INITIAL_ADMIN_* are removed after the
+# first successful boot (same rule as the reference app).
+
+name = "masjid-shameem"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ---------------------------------------------------------------------------
+# D1 — persistent managed SQLite. Replace database_id with the value printed
+# by `wrangler d1 create masjid-shameem`.
+# ---------------------------------------------------------------------------
+[[d1_databases]]
+binding = "DB"
+database_name = "masjid-shameem"
+database_id = "b8449f7a-f982-4ea5-ad0f-d8f0112bb1fa"
+
+# ---------------------------------------------------------------------------
+# Vars (non-secret). Secrets go through `wrangler secret put`.
+# ---------------------------------------------------------------------------
+[vars]
+NODE_ENV = "production"
+APP_TZ = "Asia/Kolkata"
+# PBKDF2-SHA256 iteration count — measured on the REAL Workers runtime
+# (workerd via scripts/benchmark-pbkdf2.mjs sweep):
+#   5000≈4ms · 6000≈4ms · 7000≈5ms · 8000≈6ms · 10000≈9ms · 15000≈10ms
+# 7000 keeps the full login request comfortably inside the Free 10ms CPU cap
+# on this hardware. Verify per-deploy with `wrangler tail` (cpu_time on the
+# login request) and lower to 6000 if a slower edge instance runs close to
+# the cap. The count is stored per-hash, so it can be raised later without
+# invalidating existing hashes.
+PBKDF2_ITERATIONS = "7000"
+# Secure cookies: always on behind the workers.dev HTTPS origin. The override
+# is kept for the reference app parity (COOKIE_SECURE=0 for local plain-HTTP
+# testing of this worker, e.g. `wrangler dev --local-protocol http`).
+COOKIE_SECURE = "1"
+# Never enable sample or demo seeding on a production database.
+# NODE_ENV=production disables the demo reset endpoint.

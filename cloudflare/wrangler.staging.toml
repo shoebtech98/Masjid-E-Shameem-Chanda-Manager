@@ -1,0 +1,26 @@
+# Isolated staging Worker configuration.
+#
+# Staging D1 is a distinct, newly created database. Apply its schema and
+# deploy this Worker only after separate approval. Never copy the production
+# database_id into this file.
+
+name = "masjid-shameem-staging"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "masjid-shameem-staging"
+database_id = "93556b5f-1d4b-448b-afa1-4a78e3d748f2"
+
+[vars]
+NODE_ENV = "production"
+APP_TZ = "Asia/Kolkata"
+PBKDF2_ITERATIONS = "7000"
+COOKIE_SECURE = "1"
+DEMO_MODE = "false"
+
+# Do not add SEED_SAMPLE_DATA or SEED_DEMO_USERS. Provision staging test
+# accounts and synthetic households explicitly after resource approval.

@@ -1,0 +1,12 @@
+node_modules/
+data/
+.env
+.env.*
+!.env.example
+cloudflare/backups/
+cloudflare/dist/
+cloudflare/.wrangler/
+**/.dev.vars
+**/.dev.vars.*
+*.log
+.DS_Store

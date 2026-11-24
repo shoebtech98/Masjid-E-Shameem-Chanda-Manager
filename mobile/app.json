@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "Masjid E Shameem – Chanda Manager",
+    "slug": "masjid-chanda-manager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "androidStatusBar": {
+      "backgroundColor": "#063d2c"
+    },
+    "ios": {
+      "bundleIdentifier": "com.masjidshameem.chandamanager",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIAppFonts": []
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#063d2c"
+      },
+      "package": "com.masjidshameem.chandamanager"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#063d2c"
+        }
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "apiUrl": "https://masjid-shameem-staging.kingshoaib.workers.dev",
+      "eas": {
+        "projectId": "e4bb14cc-37df-4244-876b-f89996e9995b"
+      }
+    },
+    "owner": "shoaib_1maan"
+  }
+}

@@ -1,0 +1,57 @@
+# Masjid E Shameem – Chanda Manager · production stack
+#
+#   docker compose up -d --build
+#
+# What this stack gives you:
+#   * `app`    — the Node.js/Express application (restart: unless-stopped)
+#   * `caddy`  — reverse proxy that terminates TLS and issues a free
+#                Let's Encrypt certificate automatically for your domain
+#   * `masjid-data` — named volume that persists the SQLite database AND the
+#                backups (survives restarts, redeploys, `docker compose down`)
+#
+# Requirements:
+#   * A host with Docker Engine + Compose v2 and a persistent disk.
+#   * A domain name whose DNS A/AAAA record points at the server's public IP
+#     (Caddy needs it to issue the HTTPS certificate — see Caddyfile).
+#
+# First run: create `.env` from `.env.example` on the host (never commit it),
+# and set INITIAL_ADMIN_EMAIL + INITIAL_ADMIN_PASSWORD for the one-time Admin
+# bootstrap (remove them after the first start).
+
+services:
+  app:
+    build: .
+    image: masjid-e-shameem:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Production mode enables Secure cookies + trust-proxy (TLS is
+      # terminated by Caddy in front).
+      NODE_ENV: production
+      # Container path — the SQLite file lives on the persistent volume below.
+      DB_PATH: /app/data/chanda.db
+    # The app only needs to be reachable by Caddy on the compose network;
+    # bind the container port to localhost so nothing else on the host can
+    # reach it directly (all public traffic goes through Caddy on 443).
+    expose:
+      - "3000"
+    volumes:
+      - masjid-data:/app/data
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"    # HTTP → automatic HTTPS redirect
+      - "443:443"  # HTTPS
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - app
+
+volumes:
+  masjid-data:
+  caddy-data:
+  caddy-config:

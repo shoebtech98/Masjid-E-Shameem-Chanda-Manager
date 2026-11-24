@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chanda Manager for Masjid E Shameem. Record household contributions, review payment history, and prepare reports.">
+  <meta name="theme-color" content="#fbf7f0">
+  <title>Chanda Manager | Masjid E Shameem</title>
+  <link rel="icon" href="./chanda-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./landing.css">
+  <script src="./vendor/gsap.min.js" defer></script>
+  <script src="./vendor/ScrollTrigger.min.js" defer></script>
+  <script src="./vendor/SplitText.min.js" defer></script>
+  <script src="./motion.js" defer></script>
+</head>
+<body class="landing">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="brand" href="#main"><img src="./chanda-icon.png" alt="" width="42" height="42"><span>Chanda Manager <small>Masjid E Shameem</small></span></a>
+    <nav aria-label="Main navigation"><a href="#workflow">Workflow</a><a href="#payments">Payments</a><a href="#access">Get access</a><a href="/admin">Open workspace</a></nav>
+  </header>
+  <main id="main">
+    <section class="ribbon-hero wrap" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <h1 id="home-title">Household chanda, clearly recorded.</h1>
+        <p>Record contributions for Masjid E Shameem, check who has paid, and prepare the month’s report from your laptop.</p>
+        <div class="hero-actions"><a class="button" href="/admin">Open workspace</a><a href="#workflow">See how it works</a></div>
+      </div>
+      <div class="ribbon-stack" aria-label="Chanda Manager workflows">
+        <a href="#payments"><span>Record payments</span><small>Cash, UPI, or split</small></a>
+        <a href="#workflow"><span>Review households</span><small>History and pending payments</small></a>
+        <a href="#reports"><span>Prepare reports</span><small>Monthly or annual</small></a>
+      </div>
+    </section>
+    <section class="community" aria-labelledby="community-title">
+      <div class="wrap community-grid">
+        <figure class="community-photo">
+          <img src="./masjid-interior.jpg" alt="Prayer hall at Masjid E Shameem, with green ceiling panels and blue carpets" width="1280" height="960" decoding="async">
+          <figcaption>Inside Masjid E Shameem</figcaption>
+        </figure>
+        <div class="community-copy">
+          <h2 id="community-title">The masjid behind the records</h2>
+          <p>Chanda Manager helps Masjid E Shameem treasurers keep each household’s monthly contributions in one place. Open a household to review its payments, or open a report to see the month’s totals.</p>
+        </div>
+      </div>
+    </section>
+    <section class="workflow wrap" id="workflow" aria-labelledby="workflow-title">
+      <header class="section-intro"><h2 id="workflow-title">From collection to monthly report</h2><p>Follow an entry from the household’s payment to the committee’s report.</p></header>
+      <div class="workflow-path" aria-hidden="true"><span class="path-line"></span><span class="path-fill"></span><span class="path-arrow"></span></div>
+      <div class="workflow-grid">
+        <article class="workflow-step"><h3>Record</h3><p>Find the household, select the contribution month, and enter the payment date and amount.</p></article>
+        <article class="workflow-step"><h3>Review</h3><p>Open Homes to see a household’s payment history. Use the monthly report to check who is still pending.</p></article>
+        <article class="workflow-step"><h3>Report</h3><p>Review monthly or annual totals, then print the report or save it as a PDF.</p></article>
+      </div>
+    </section>
+    <section class="payments" id="payments" aria-labelledby="payments-title">
+      <div class="wrap payments-grid">
+        <div class="section-intro"><h2 id="payments-title">Record how the household paid</h2><p>Choose the method in Collect. The payment stays linked to the household and contribution month.</p></div>
+        <dl class="payment-methods">
+          <div><dt>Cash</dt><dd>Enter the cash amount received.</dd></div>
+          <div><dt>UPI</dt><dd>Enter the amount and add a payment reference when available.</dd></div>
+          <div><dt>Split payment</dt><dd>Enter the cash and UPI portions. Together they must equal the total.</dd></div>
+        </dl>
+      </div>
+    </section>
+    <section class="reports wrap" id="reports" aria-labelledby="reports-title">
+      <div class="section-intro"><h2 id="reports-title">Look up receipts. Close out the month.</h2><p>Use the laptop workspace when you need to review an entry, print a receipt, or prepare a report.</p></div>
+      <div class="report-rows">
+        <details><summary>Household history and receipts</summary><p>Open Homes, find the household, and select a payment. From the payment record, you can correct the entry or print the receipt.</p></details>
+        <details><summary>Monthly and annual reports</summary><p>Open Reports and choose a period. Monthly reports include payment records and pending households. Annual reports show monthly and household totals.</p></details>
+        <details><summary>Saving a report as a PDF</summary><p>Open a report and select Print / Save PDF. Choose Save as PDF in your browser’s print dialog.</p></details>
+      </div>
+    </section>
+    <section class="access" id="access" aria-labelledby="access-title">
+      <div class="wrap access-grid">
+        <div><h2 id="access-title">Get access to Chanda Manager</h2><p>Use your existing administrator account to sign in to the laptop workspace. For mobile access, ask the Masjid E Shameem committee for an account and installation instructions.</p></div>
+        <a class="button" href="/admin">Open workspace</a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span>Masjid E Shameem</span><a href="#main">Back to top</a></footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Caddy reverse proxy with automatic HTTPS (Let's Encrypt).
+#
+# Replace `masjid.example.org` with your real domain and point its DNS A/AAAA
+# record at the server's public IP BEFORE the first `docker compose up`.
+# Caddy then obtains and renews the certificate automatically — no manual TLS
+# configuration is ever needed.
+
+masjid.example.org {
+    encode gzip
+
+    # All traffic is proxied to the `app` service on the compose network.
+    # The Node process keeps NODE_ENV=production, so `trust proxy` is on and
+    # Secure session cookies are issued correctly.
+    reverse_proxy app:3000
+}

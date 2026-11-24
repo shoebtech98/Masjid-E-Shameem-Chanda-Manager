@@ -1,0 +1,22 @@
+# Local dependencies & data — never baked into the image
+node_modules
+**/node_modules
+data
+cloudflare
+mobile
+.env
+.env.*
+!.env.example
+
+# VCS / editor cruft
+.git
+.gitignore
+*.log
+.DS_Store
+
+# Deployment artifacts (kept on the host, not in the image)
+Dockerfile
+.dockerignore
+docker-compose.yml
+Caddyfile
+DEPLOY.md

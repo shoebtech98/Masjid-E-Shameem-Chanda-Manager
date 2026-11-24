@@ -1,0 +1,15 @@
+# OCI Always Free override — mounts the SQLite database + backups on a
+# dedicated persistent BLOCK VOLUME (attached at /opt/masjid-data on the VM)
+# instead of the default Docker named volume. See OCI-DEPLOY.md step 12.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.oci.yml up -d --build
+#
+# (Compose merges volumes by container path, so this single line replaces the
+# named-volume mount from docker-compose.yml for the app service. Caddy's
+# volumes are untouched.)
+
+services:
+  app:
+    volumes:
+      - /opt/masjid-data:/app/data

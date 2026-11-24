@@ -1,0 +1,28 @@
+{
+  "name": "masjid-shameem-cloudflare",
+  "version": "1.0.0",
+  "description": "Masjid E Shameem – Chanda Manager · Cloudflare Workers + D1 API",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "node --check src/index.js && node --check src/db.js && node --check src/auth.js && node --check src/password.js && node --check src/time.js && node --check src/validate.js && node --check src/report-data.js && node --check src/audit.js && node --check src/routes/auth.js && node --check src/routes/households.js && node --check src/routes/payments.js && node --check src/routes/dashboard.js && node --check src/routes/reports.js && node --check src/routes/settings.js && node --check src/routes/users.js && node --check src/routes/audit.js && node --check test/cors.test.mjs",
+    "build": "npm run check",
+    "test:time": "node test/time.test.mjs",
+    "test:cors": "node test/cors.test.mjs",
+    "benchmark": "node scripts/benchmark-pbkdf2.mjs",
+    "crosscheck": "node scripts/qa-crosscheck.mjs",
+    "export-local": "node scripts/export-local.mjs",
+    "bootstrap-passwords": "node scripts/bootstrap-passwords.mjs"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "hono": "^4.13.21"
+  },
+  "devDependencies": {
+    "wrangler": "^4.123.0"
+  }
+}

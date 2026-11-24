@@ -1,0 +1,7 @@
+# Benchmark-only config: runs the tiny PBKDF2 timing worker in workerd.
+# Not used by the application. Usage:
+#   npx wrangler dev --config wrangler.bench.toml --port 8791 --ip 127.0.0.1
+#   curl "http://127.0.0.1:8791/bench?iterations=15000"
+name = "masjid-bench"
+main = "bench/bench-worker.js"
+compatibility_date = "2026-08-01"
